@@ -66,6 +66,17 @@ Delete any existing Squarespace A or CNAME records for `@` and `www` that point 
 
 Netlify and Cloudflare Pages work the same way: drag the folder in, then point the domain at the address they give you.
 
+## After editing CSS or JS
+
+GitHub Pages tells browsers to cache files for 10 minutes, so a normal refresh can keep showing the old stylesheet. Bump the version number on the two tags in `index.html` whenever you change `style.css` or `main.js`:
+
+```
+<link rel="stylesheet" href="css/style.css?v=3">
+<script src="js/main.js?v=3"></script>
+```
+
+Any new number works. Browsers see a new address and fetch a fresh copy. If you forget, a hard refresh (Ctrl+Shift+R) shows the latest version.
+
 ## Updating the site
 
 Edit the files, commit, push. GitHub Pages redeploys in about a minute.
