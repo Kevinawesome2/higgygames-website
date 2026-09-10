@@ -1,0 +1,7 @@
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.log
+
+# Claude Code local settings (keep out of the public repo)
+.claude/
