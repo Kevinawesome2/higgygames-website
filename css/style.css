@@ -120,6 +120,19 @@ button, input, textarea { font: inherit; color: inherit; }
 	box-shadow: 0 10px 30px rgba(255, 84, 112, 0.35);
 }
 .btn--primary:hover { background: var(--accent-strong); box-shadow: 0 14px 34px rgba(255, 84, 112, 0.45); }
+/* Steam-branded call to action: Steam's navy gradient with its light-blue glow. */
+.btn--steam {
+	padding-left: 18px; gap: 12px;
+	background: linear-gradient(160deg, #2a475e 0%, #1b2838 60%, #171a21 100%); color: #fff;
+	border-color: rgba(102, 192, 244, 0.35);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.btn--steam svg { width: 32px; height: 32px; }
+.btn--steam:hover {
+	background: linear-gradient(160deg, #35597a 0%, #22334a 60%, #1b2838 100%);
+	border-color: rgba(102, 192, 244, 0.7);
+	box-shadow: 0 14px 34px rgba(102, 192, 244, 0.25);
+}
 .btn--ghost {
 	background: rgba(255, 255, 255, 0.08); color: #fff;
 	border-color: rgba(255, 255, 255, 0.28);
@@ -129,11 +142,12 @@ button, input, textarea { font: inherit; color: inherit; }
 
 .icon-btn {
 	display: inline-flex; align-items: center; justify-content: center;
-	width: 46px; height: 46px; border-radius: 50%;
+	width: 46px; height: 46px; border-radius: 26%;
 	background: #fff; color: var(--bg);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 	transition: transform 0.2s var(--ease);
 }
-.icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+.icon-btn svg { width: 26px; height: 26px; fill: currentColor; }
 .icon-btn:hover { transform: scale(1.08); }
 
 /* ---------- Hero ---------- */
@@ -276,20 +290,27 @@ button, input, textarea { font: inherit; color: inherit; }
 .socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 .socials a {
 	display: inline-flex; align-items: center; justify-content: center;
-	width: 52px; height: 52px; border-radius: 50%;
+	width: 52px; height: 52px; border-radius: 26%;
 	background: #fff; color: var(--bg);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 	transition: transform 0.2s var(--ease);
 }
-.socials a svg { width: 24px; height: 24px; fill: currentColor; }
+.socials a svg { width: 30px; height: 30px; fill: currentColor; }
 .socials a:hover { transform: translateY(-3px) scale(1.06); }
 
-/* Official brand colours (glyph on a white disc). Applies to the footer and the game-card Steam button. */
-.socials a[data-brand="steam"],   .icon-btn[data-brand="steam"]   { color: #171a21; }
-.socials a[data-brand="youtube"], .icon-btn[data-brand="youtube"] { color: #ff0000; }
-.socials a[data-brand="tiktok"],  .icon-btn[data-brand="tiktok"]  { color: #000000; }
-.socials a[data-brand="x"],       .icon-btn[data-brand="x"]       { color: #000000; }
-.socials a[data-brand="bluesky"], .icon-btn[data-brand="bluesky"] { color: #1185fe; }
-.socials a[data-brand="discord"], .icon-btn[data-brand="discord"] { color: #5865f2; }
+/* App-icon style: official brand colour as the tile, white glyph on top.
+   Applies to the footer row and the game-card Steam button. */
+.socials a[data-brand], .icon-btn[data-brand] { color: #fff; }
+.socials a[data-brand="steam"],     .icon-btn[data-brand="steam"]     { background: linear-gradient(160deg, #2a475e 0%, #1b2838 60%, #171a21 100%); }
+.socials a[data-brand="youtube"],   .icon-btn[data-brand="youtube"]   { background: #fff; color: #ff0000; } /* red logo (with its own play cut-out) on white */
+.socials a[data-brand="tiktok"],    .icon-btn[data-brand="tiktok"]    { background: #010101; }
+.socials a[data-brand="instagram"], .icon-btn[data-brand="instagram"] { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+.socials a[data-brand="x"],         .icon-btn[data-brand="x"]         { background: #000000; }
+.socials a[data-brand="bluesky"],   .icon-btn[data-brand="bluesky"]   { background: #1185fe; }
+.socials a[data-brand="discord"],   .icon-btn[data-brand="discord"]   { background: #5865f2; }
+/* TikTok's glyph carries its own cyan/red offset layers. */
+.socials a[data-brand="tiktok"] .tt-cyan, .icon-btn[data-brand="tiktok"] .tt-cyan { fill: #25f4ee; }
+.socials a[data-brand="tiktok"] .tt-red,  .icon-btn[data-brand="tiktok"] .tt-red  { fill: #fe2c55; }
 .socials li[hidden] { display: none; }
 .footer__copy { margin-top: 26px; color: var(--muted); font-size: 0.9rem; }
 
