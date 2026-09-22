@@ -92,23 +92,29 @@
 	var status = document.getElementById("formStatus");
 	if (form) {
 		var endpoint = form.getAttribute("action") || "";
-		var configured = endpoint.indexOf("YOUR_FORM_ID") === -1;
-		var mailLink = document.querySelector(".contact__email a[href^='mailto:']");
-		var mailto = mailLink ? mailLink.getAttribute("href").replace(/^mailto:/, "") : "";
+
+		// Cloudflare Turnstile spam check. Only load the widget once a real site key is in place,
+		// so the form keeps working while the key is still the placeholder.
+		var captcha = form.querySelector(".cf-turnstile");
+		if (captcha && (captcha.getAttribute("data-sitekey") || "").indexOf("YOUR_") === 0) {
+			captcha.parentNode.removeChild(captcha);
+			captcha = null;
+		}
+		if (captcha) {
+			var turnstileScript = document.createElement("script");
+			turnstileScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+			turnstileScript.async = true;
+			turnstileScript.defer = true;
+			document.head.appendChild(turnstileScript);
+		}
 
 		form.addEventListener("submit", function (e) {
 			e.preventDefault();
 			var data = new FormData(form);
-			var name = data.get("name") || "";
-			var email = data.get("email") || "";
-			var message = data.get("message") || "";
 
-			if (!configured) {
-				// No form backend yet: hand off to the visitor's email app.
-				var subject = encodeURIComponent("Message from " + name + " via higgygames site");
-				var body = encodeURIComponent(message + "\n\n— " + name + " <" + email + ">");
-				window.location.href = "mailto:" + mailto + "?subject=" + subject + "&body=" + body;
-				setStatus("Opening your email app…", "");
+			// Turnstile fills in cf-turnstile-response once it has verified the visitor.
+			if (captcha && !data.get("cf-turnstile-response")) {
+				setStatus("Still checking you're not a robot. Try again in a moment.", "is-error");
 				return;
 			}
 
@@ -123,9 +129,13 @@
 					setStatus("Thanks! Your message is on its way.", "is-ok");
 				})
 				.catch(function () {
-					setStatus("Something went wrong. Please email us directly instead.", "is-error");
+					setStatus("Something went wrong. Please try again, or reach us on Discord.", "is-error");
 				})
-				.then(function () { btn.disabled = false; });
+				.then(function () {
+					btn.disabled = false;
+					// Turnstile tokens are single use, so ask for a fresh one before the next send.
+					if (captcha && window.turnstile) window.turnstile.reset(captcha);
+				});
 		});
 	}
 

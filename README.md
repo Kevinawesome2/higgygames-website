@@ -26,10 +26,26 @@ Search `index.html` for `EDIT ME`. Each one is a placeholder:
 
 - Steam store URL (hero button, game card icon, footer icon)
 - Social links in the footer. Any link left as `#` is hidden automatically.
-- Contact email (`mailto:` link in the Contact section)
-- Formspree endpoint on the contact form. Until you replace `YOUR_FORM_ID`, submitting the form opens the visitor's email app with the message pre-filled instead.
 - `og:url` and `og:image` in the `<head>` once the domain is live, so link previews resolve.
 - Founder name, role, and portrait in the About section.
+- Cloudflare Turnstile site key on the contact form (see the next section).
+
+## Contact form and spam
+
+The Contact section deliberately shows no email address. Scrapers harvest `mailto:` links, so the only way in is the form, which posts to Formspree and lands in the studio inbox from there. The form endpoint is the `action` attribute on `<form id="contactForm">` in `index.html`.
+
+Spam protection, in three layers:
+
+- A honeypot field named `_gotcha`, hidden from people but filled in by naive bots. Formspree silently discards any submission where it has a value.
+- Formspree's own server-side spam filtering. Anything it flags shows up under the Spam tab in the Formspree dashboard rather than in your inbox.
+- Cloudflare Turnstile, a free CAPTCHA that verifies most visitors without a puzzle. The widget sits just above the Send button in `index.html`. `main.js` only loads the Turnstile script once a real site key is in place, so the form keeps working while the key is still the placeholder.
+
+To set Turnstile up for the first time, or to rotate the keys, do the steps in this order so the form is never left rejecting everything:
+
+1. In the Cloudflare dashboard, open Turnstile, add a widget for `higgygames.com` (Managed mode), and copy the Site Key and Secret Key.
+2. In `index.html`, paste the Site Key into the `data-sitekey` attribute of the `cf-turnstile` div (search for `EDIT ME`). The site key is public and fine to commit. The secret key never goes in the repo.
+3. Commit and push, and confirm the widget shows on the live site.
+4. In the Formspree form settings, enable CAPTCHA, choose Cloudflare Turnstile, and paste the Secret Key. From this point Formspree rejects any submission without a valid Turnstile token.
 
 ## Adding the trailer
 

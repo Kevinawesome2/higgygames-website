@@ -265,8 +265,10 @@ button, input, textarea { font: inherit; color: inherit; }
 .member__role { color: var(--muted); margin-top: 4px; font-weight: 600; }
 
 /* ---------- Contact ---------- */
-.contact__email { text-align: center; margin: -16px 0 36px; }
+.section__head p a { color: var(--accent-2); text-underline-offset: 3px; }
+.section__head p a:hover { color: var(--text); }
 .form { display: grid; gap: 14px; }
+.cf-turnstile:empty { display: none; } /* no gap until the Turnstile widget has rendered */
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form input, .form textarea {
 	width: 100%; padding: 14px 16px; border-radius: var(--radius);
