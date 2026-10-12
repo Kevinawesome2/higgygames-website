@@ -120,6 +120,29 @@ button, input, textarea { font: inherit; color: inherit; }
 	box-shadow: 0 10px 30px rgba(255, 84, 112, 0.35);
 }
 .btn--primary:hover { background: var(--accent-strong); box-shadow: 0 14px 34px rgba(255, 84, 112, 0.45); }
+/* "Coming soon..." bubble shown at the pointer when an unset Steam button is clicked (js/main.js). */
+.coming-soon {
+	position: fixed;
+	z-index: 1000;
+	transform: translate(-50%, -140%);
+	padding: 6px 14px;
+	border-radius: 999px;
+	border: 1px solid var(--line);
+	background: var(--surface);
+	color: var(--text);
+	font-weight: 700;
+	font-size: 0.9rem;
+	white-space: nowrap;
+	box-shadow: var(--shadow);
+	pointer-events: none;
+	animation: coming-soon 1.4s var(--ease) forwards;
+}
+@keyframes coming-soon {
+	0% { opacity: 0; }
+	15%, 70% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
 /* Steam-branded call to action: Steam's navy gradient with its light-blue glow. */
 .btn--steam {
 	padding-left: 18px; gap: 12px;

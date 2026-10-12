@@ -14,6 +14,23 @@
 	window.addEventListener("scroll", updateTopbar, { passive: true });
 	updateTopbar();
 
+	/* ---- Hero background: cycle through the gameplay clips ---- */
+	var heroVideo = document.getElementById("heroVideo");
+	var heroClips = ["basket-make", "donut-gameplay", "skin-pickup", "turning"];
+	if (heroVideo) {
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			// Leave the still hero image showing instead.
+			heroVideo.parentNode.removeChild(heroVideo);
+		} else {
+			var heroClip = 0;
+			heroVideo.addEventListener("ended", function () {
+				heroClip = (heroClip + 1) % heroClips.length;
+				heroVideo.src = "assets/videos/" + heroClips[heroClip] + ".mp4";
+				heroVideo.play();
+			});
+		}
+	}
+
 	/* ---- Mobile menu ---- */
 	function closeMenu() {
 		nav.classList.remove("is-open");
@@ -75,7 +92,16 @@
 			// Unset Steam buttons stay visible but explain themselves instead of jumping to the top.
 			a.addEventListener("click", function (e) {
 				e.preventDefault();
-				a.setAttribute("title", "Steam page coming soon");
+				// Keyboard activation has no pointer position, so fall back to the button itself.
+				var r = a.getBoundingClientRect();
+				var tip = document.createElement("div");
+				tip.className = "coming-soon";
+				tip.setAttribute("role", "status");
+				tip.textContent = "Coming soon...";
+				tip.style.left = (e.clientX || r.left + r.width / 2) + "px";
+				tip.style.top = (e.clientY || r.top) + "px";
+				document.body.appendChild(tip);
+				setTimeout(function () { tip.remove(); }, 1400);
 			});
 			return;
 		}

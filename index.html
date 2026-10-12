@@ -24,7 +24,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css?v=6">
+	<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -60,20 +60,15 @@
 		<!-- ================= HOME / HERO ================= -->
 		<section class="hero" id="home">
 			<div class="hero__media" aria-hidden="true">
-				<!--
-					When trailer ready, drop it in assets/videos/ and uncomment this block.
-					The poster image keeps the screenshot visible until the video loads.
-
-				<video class="hero__video" autoplay muted loop playsinline poster="assets/images/hero.jpg">
-					<source src="assets/videos/hero.mp4" type="video/mp4">
-				</video>
-				-->
+				<!-- Gameplay clips: js/main.js plays the next one in assets/videos/ as each ends.
+				     The poster image keeps the screenshot visible until the first clip loads. -->
+				<video class="hero__video" id="heroVideo" autoplay muted playsinline poster="assets/images/hero.jpg" src="assets/videos/basket-make.mp4"></video>
 			</div>
 
 			<div class="hero__content reveal">
 				<p class="hero__eyebrow">Coming soon to PC</p>
 				<h1 class="hero__title">Disc-yphus</h1>
-				<p class="hero__tagline">A challenging disc golf themed precision platformer.<br>Launch. Fall. Launch again.</p>
+				<p class="hero__tagline">A difficult disc golf-themed 3D platformer inspired by classic rage games where precision defines success and falling is permanent.</p>
 				<div class="hero__actions">
 					<!-- EDIT ME: replace "#" with your Steam store page URL -->
 					<a class="btn btn--steam" href="#" data-external>
@@ -104,7 +99,7 @@
 						</a>
 						<div class="game__body">
 							<h3 class="game__title">Disc-yphus</h3>
-							<p class="game__meta">Physics-based &quot;Foddian&quot; climber &middot; PC &middot; Coming soon</p>
+							<p class="game__meta">PC &middot; Coming soon</p>
 							<p class="game__desc">
 								Scoring par is out of the picture, you will be lucky to see the back 9. Launch, steer, and flop your way up 5
 								unique areas with ridiculous obstacles to find 18 sets of chains. Pilot your disc from a quiet meadow to the
@@ -212,6 +207,6 @@
 		</div>
 	</footer>
 
-	<script src="js/main.js?v=3"></script>
+	<script src="js/main.js?v=5"></script>
 </body>
 </html>
