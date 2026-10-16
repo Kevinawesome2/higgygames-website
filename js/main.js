@@ -113,6 +113,13 @@
 	var socials = document.querySelector(".socials");
 	if (socials && !socials.querySelector("li:not([hidden])")) socials.hidden = true;
 
+	// Mirror the footer socials into the top bar, right of the wordmark.
+	if (socials && !socials.hidden) {
+		var topSocials = socials.cloneNode(true);
+		topSocials.classList.add("socials--top");
+		document.querySelector(".wordmark").after(topSocials);
+	}
+
 	/* ---- Contact form ---- */
 	var form = document.getElementById("contactForm");
 	var status = document.getElementById("formStatus");

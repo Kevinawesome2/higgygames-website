@@ -337,6 +337,11 @@ button, input, textarea { font: inherit; color: inherit; }
 .socials a[data-brand="tiktok"] .tt-cyan, .icon-btn[data-brand="tiktok"] .tt-cyan { fill: #25f4ee; }
 .socials a[data-brand="tiktok"] .tt-red,  .icon-btn[data-brand="tiktok"] .tt-red  { fill: #fe2c55; }
 .socials li[hidden] { display: none; }
+/* Compact copy in the top bar; auto margin keeps it next to the wordmark. */
+.socials--top { flex-wrap: nowrap; gap: 8px; margin-right: auto; }
+.socials--top a { width: 32px; height: 32px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35); }
+.socials--top a svg { width: 18px; height: 18px; }
+.socials--top a:hover { transform: translateY(-2px) scale(1.06); }
 .footer__copy { margin-top: 26px; color: var(--muted); font-size: 0.9rem; }
 
 /* ---------- Reveal on scroll ---------- */
@@ -369,6 +374,9 @@ button, input, textarea { font: inherit; color: inherit; }
 	}
 	.nav.is-open { transform: none; opacity: 1; visibility: visible; }
 	.nav a { padding: 14px 16px; text-align: center; font-size: 1.05rem; }
+	.socials--top { gap: 6px; }
+	.socials--top a { width: 28px; height: 28px; }
+	.socials--top a svg { width: 16px; height: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
