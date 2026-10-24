@@ -7,6 +7,8 @@ index.html          the whole page (Home / Games / About / Contact / footer)
 css/style.css       styles and palette (edit the :root variables to retheme)
 js/main.js          sticky nav, mobile menu, reveal animations, contact form
 assets/images/      hero background, game card, share image, favicon
+assets/fonts/       self-hosted Fredoka + Nunito (variable woff2, Latin)
+privacy.html        privacy policy, linked from the footer and the contact form
 assets/videos/      (empty) drop hero.mp4 here when you have a trailer
 ```
 
@@ -18,7 +20,7 @@ Any static server works. From this folder:
 python -m http.server 8080
 ```
 
-Then open http://localhost:8080. Opening `index.html` directly from disk also works, minus the fonts if you're offline.
+Then open http://localhost:8080. Opening `index.html` directly from disk also works. Fonts are self-hosted in `assets/fonts/` (no Google requests, for GDPR).
 
 ## Things to fill in
 

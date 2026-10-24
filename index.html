@@ -21,10 +21,7 @@
 	<link rel="icon" type="image/png" href="assets/images/favicon.png">
 	<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css?v=8">
+	<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -78,6 +75,11 @@
 					<a class="btn btn--ghost" href="#games">Learn more</a>
 				</div>
 			</div>
+
+			<button class="hero__pause" id="heroPause" type="button" aria-label="Pause background video">
+				<svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+				<svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>
+			</button>
 
 			<a class="hero__scroll" href="#games" aria-label="Scroll to games">
 				<span></span>
@@ -172,6 +174,7 @@
 						<button class="btn btn--primary" type="submit">Send</button>
 						<p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
 					</div>
+					<p class="form__note">We only use your details to reply. See our <a href="privacy.html">Privacy Policy</a>.</p>
 				</form>
 			</div>
 		</section>
@@ -204,9 +207,10 @@
 				</a></li>
 			</ul>
 			<p class="footer__copy">&copy; <span id="year">2026</span> HiggyGames LLC. All rights reserved.</p>
+			<p class="footer__links"><a href="privacy.html">Privacy Policy</a></p>
 		</div>
 	</footer>
 
-	<script src="js/main.js?v=6"></script>
+	<script src="js/main.js?v=7"></script>
 </body>
 </html>

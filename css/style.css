@@ -4,6 +4,11 @@
    watermelon-red accent, meadow-green secondary.
    ========================================================================== */
 
+/* Self-hosted so visitors' IPs never go to Google. Variable fonts, Latin subset. */
+@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 300 700; font-display: swap; src: url("../assets/fonts/fredoka.woff2") format("woff2"); }
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 200 1000; font-display: swap; src: url("../assets/fonts/nunito.woff2") format("woff2"); }
+@font-face { font-family: "Nunito"; font-style: italic; font-weight: 200 1000; font-display: swap; src: url("../assets/fonts/nunito-italic.woff2") format("woff2"); }
+
 :root {
 	--bg: #0d1726;
 	--bg-alt: #111d30;
@@ -226,6 +231,19 @@ button, input, textarea { font: inherit; color: inherit; }
 	width: 4px; height: 8px; border-radius: 2px; background: #fff;
 	animation: scroll-hint 1.8s ease-in-out infinite;
 }
+/* Pause/play for the moving background (WCAG 2.2.2). */
+.hero__pause {
+	position: absolute; right: 20px; bottom: 28px;
+	display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+	border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%;
+	background: rgba(13, 23, 38, 0.55); color: #fff; cursor: pointer;
+	backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.hero__pause svg { width: 18px; height: 18px; fill: currentColor; }
+.hero__pause .icon-play, .hero.is-paused .hero__pause .icon-pause { display: none; }
+.hero.is-paused .hero__pause .icon-play { display: block; }
+.hero.is-paused .hero__media { animation-play-state: paused; }
+
 @keyframes scroll-hint {
 	0%   { transform: translateY(0); opacity: 1; }
 	70%  { transform: translateY(16px); opacity: 0; }
@@ -308,6 +326,18 @@ button, input, textarea { font: inherit; color: inherit; }
 .form__status { color: var(--muted); font-weight: 600; min-height: 1.5em; }
 .form__status.is-ok { color: var(--accent-2); }
 .form__status.is-error { color: var(--accent); }
+.form__note { color: var(--muted); font-size: 0.9rem; }
+.form__note a, .footer__links a, .legal a { color: var(--accent-2); text-underline-offset: 3px; }
+
+/* ---------- Privacy page ---------- */
+.legal { padding-top: calc(var(--topbar-h) + 56px); }
+.legal h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+.legal h2 { font-size: 1.4rem; margin: 36px 0 10px; }
+.legal p, .legal li { color: var(--muted); }
+.legal p + p, .legal p + ul, .legal ul + p { margin-top: 12px; }
+.legal ul { list-style: disc; padding-left: 1.3em; }
+.legal li + li { margin-top: 6px; }
+.legal strong { color: var(--text); }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 1px solid var(--line); padding: 48px 24px 40px; background: var(--bg-alt); }
@@ -343,6 +373,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .socials--top a svg { width: 18px; height: 18px; }
 .socials--top a:hover { transform: translateY(-2px) scale(1.06); }
 .footer__copy { margin-top: 26px; color: var(--muted); font-size: 0.9rem; }
+.footer__links { margin-top: 8px; font-size: 0.9rem; }
 
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
@@ -382,6 +413,7 @@ button, input, textarea { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
 	.hero__media, .hero__scroll span { animation: none; }
+	.hero__pause { display: none; } /* nothing moves, so nothing to pause */
 	.reveal { opacity: 1; transform: none; transition: none; }
 	.btn, .icon-btn, .socials a, .game__media img { transition: none; }
 }
