@@ -9,31 +9,24 @@
 
 	/* ---- Solid top bar once the hero starts scrolling away ---- */
 	function updateTopbar() {
-		topbar.classList.toggle("is-solid", window.scrollY > 24);
+		topbar.classList.toggle("is-solid", window.scrollY > 24 || !document.querySelector(".hero")); // no hero (privacy page) = always solid
 	}
 	window.addEventListener("scroll", updateTopbar, { passive: true });
 	updateTopbar();
 
-	/* ---- Hero background: cycle through the gameplay clips ---- */
+	/* ---- Hero background trailer ---- */
 	var heroVideo = document.getElementById("heroVideo");
 	var heroPause = document.getElementById("heroPause");
-	var heroClips = ["basket-make", "donut-gameplay", "skin-pickup", "turning"];
 	if (heroVideo) {
 		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 			// Leave the still hero image showing instead.
 			heroVideo.parentNode.removeChild(heroVideo);
 		} else {
-			// Pause/play stops both the clips and the background drift.
+			// Pause/play stops both the trailer and the background drift.
 			heroPause.addEventListener("click", function () {
 				var paused = heroPause.closest(".hero").classList.toggle("is-paused");
 				if (paused) heroVideo.pause(); else heroVideo.play();
 				heroPause.setAttribute("aria-label", paused ? "Play background video" : "Pause background video");
-			});
-			var heroClip = 0;
-			heroVideo.addEventListener("ended", function () {
-				heroClip = (heroClip + 1) % heroClips.length;
-				heroVideo.src = "assets/videos/" + heroClips[heroClip] + ".mp4";
-				heroVideo.play();
 			});
 		}
 	}
