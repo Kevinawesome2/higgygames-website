@@ -26,7 +26,6 @@ Then open http://localhost:8080. Opening `index.html` directly from disk also wo
 
 Search `index.html` for `EDIT ME`. Each one is a placeholder:
 
-- Steam store URL (hero button, game card icon, footer icon)
 - Social links in the footer. Any link left as `#` is hidden automatically.
 - `og:url` and `og:image` in the `<head>` once the domain is live, so link previews resolve.
 - Founder name, role, and portrait in the About section.
